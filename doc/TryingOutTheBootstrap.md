@@ -44,7 +44,8 @@ You’re ready to go!  Try this:
 
 ```sh
 pushd cucumber-bootstrap
-nix-shell -p bundler ruby --run 'PATH=$PATH:../hs-cucumber/dist/build/cucino/ ./bin/cucumber'
+absolutePathToBuildDir=$(cd ../hs-cucumber/dist/build/cucino/; pwd)
+nix-shell -p bundler ruby --run "PATH=\$PATH:$absolutePathToBuildDir ./bin/cucumber"
 popd
 ```
 
