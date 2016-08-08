@@ -25,7 +25,6 @@ executable cucino
   main-is:             Main.hs
   build-depends:       base >=4.9 && <4.10
                      , abacate >=0.0 && <0.1
-                     , cucumber
                      , mtl >=2.2 && <2.3
                      , regex-posix >=0.95 && <0.96
                      , text >=1.2 && <1.3
