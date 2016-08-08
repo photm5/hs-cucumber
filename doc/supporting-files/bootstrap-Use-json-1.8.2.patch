@@ -1,0 +1,27 @@
+From c23cf429116d3ce98ed0d2170aca63cc682faa54 Mon Sep 17 00:00:00 2001
+From: shak-mar <shakmar@openmailbox.org>
+Date: Mon, 8 Aug 2016 18:09:07 +0200
+Subject: [PATCH] Use json 1.8.2
+
+This fixes a problem that arises with json 1.6.1 and newer versions of ruby.
+See https://github.com/flori/json/issues/229 for more details.
+---
+ Gemfile.lock | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Gemfile.lock b/Gemfile.lock
+index 50ca207..4d25d31 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -22,7 +22,7 @@ GEM
+     ffi (1.0.9)
+     gherkin (2.5.0)
+       json (>= 1.4.6)
+-    json (1.6.1)
++    json (1.8.2)
+     rack (1.3.3)
+     rdiscount (1.6.8)
+     rspec (2.6.0)
+-- 
+2.9.1
+
