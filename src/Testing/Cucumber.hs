@@ -60,7 +60,7 @@ putResults rs = do
             <> ": " <> showRes (foldl1 mergeRess $ stepResults r)
   where nScen = length rs
         nStep = sum $ map (length . stepResults) rs
-        showRes (Failed x) = "failed: " <> x
+        showRes (Failed x) = "failed\n(" <> x <> ")"
         showRes x = map toLower $ show x
 
 cucumberOnScens :: [Mapping Identity] -> [Scenario] -> IO Results
