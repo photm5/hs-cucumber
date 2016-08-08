@@ -28,7 +28,7 @@ leaving you with the required ruby things:
 
 ```sh
 pushd cucumber-bootstrap
-nix-shell -p bundler --run 'bundler --binstubs bin --path gems
+nix-shell -p bundler --run 'bundler --binstubs bin --path gems'
 popd
 ```
 
