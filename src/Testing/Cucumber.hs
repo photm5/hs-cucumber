@@ -77,7 +77,7 @@ cucumberOnScen ms s = return . ScenarioResult s . reverse . fst $
             [f] -> case f state of
               Left err -> (Failed err : rs, state)
               Right state' -> (Passed : rs, state')
-            _ -> (Failed "TODO: Error message" : rs, state)
+            _ -> (Failed "Multiple mappings matching a step" : rs, state)
         matches :: Step -> [(Dynamic -> Report Dynamic)]
         matches s = catMaybes $ map (($ stepMultiline s) . ($ stepText s) .
                                      ($ stepKeyword s) . match) ms
