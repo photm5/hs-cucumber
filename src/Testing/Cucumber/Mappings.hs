@@ -50,16 +50,6 @@ mapp :: (Typeable a, Typeable b, MultilineArgLike l)
 mapp c e h = mappM c e $ toIdentHandler h
   where toIdentHandler h gs m s = Identity $ h gs m s
 
-exampleMappings :: [Mapping Identity]
-exampleMappings =
-  [ mapp Given "the number ([0-9]*)" $ \[x] () () ->
-      maybe (Left "Not a number!") Right (readMaybe x :: Maybe Int)
-  , mapp When  "I add ([0-9]+) to it" $ \[x] () (n :: Int) ->
-      maybe (Left "Not a number!") Right $ (n +) <$> readMaybe x
-  , mapp Then "the result is ([0-9]+)" $ \[x] () (n :: Int) ->
-      maybe (Left "Not a number!") Right $ (n ==) <$> readMaybe x
-  ]
-
 matchM :: (Monad m)
        => Mapping m
        -> Keyword
@@ -84,8 +74,7 @@ matchM' e h s m = h <$> submatches <*> Just m
 match :: Mapping Identity -- ^ A Mapping
       -> Keyword          -- ^ The Keyword of a step
       -> String           -- ^ The text of a step
-      -> Maybe MultilineArg
+      -> Maybe MultilineArg -- ^ The MultilineArg of a step
       -> Maybe (Dynamic -> Report Dynamic) -- ^ If mapping matches, a conversion
                                            --   on the state
-                                --   state
 match m k s ml = (runIdentity .) <$> matchM m k s ml
