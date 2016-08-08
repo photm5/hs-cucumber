@@ -4,12 +4,15 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { cabal-install, mkDerivation, base, stdenv }:
+  f = { cabal-install, mkDerivation, abacate, base, mtl, regex-posix, stdenv }:
       mkDerivation {
         pname = "cucumber";
         version = "0.1.0.0";
         src = ./.;
-        libraryHaskellDepends = [ cabal-install base ];
+        isLibrary = true;
+        isExecutable = true;
+        libraryHaskellDepends = [ cabal-install abacate base mtl regex-posix ];
+        executableHaskellDepends = [ cabal-install base ];
         license = stdenv.lib.licenses.bsd3;
       };
 
