@@ -9,7 +9,7 @@ first clone the two repositories:
 
 ```sh
 git clone https://github.com/cucumber/cucumber-bootstrap
-git clone https://github.com/shak-mar/TODO-fill-in-repository-name-here
+git clone https://github.com/shak-mar/hs-cucumber
 ```
 
 Since there is a [problem][2] with json 1.6.1 and latest ruby versions, you may
@@ -18,7 +18,7 @@ problem:
 
 ```sh
 pushd cucumber-bootstrap
-git am ../TODO-fill-in-repository-name-here/doc/supporting-files/bootstrap-Use-json-1.8.2.patch
+git am ../hs-cucumber/doc/supporting-files/bootstrap-Use-json-1.8.2.patch
 popd
 ```
 
@@ -34,7 +34,7 @@ popd
 Next, compile the `cucino` binary I implemented in Haskell:
 
 ```sh
-pushd TODO-fill-in-repository-name-here
+pushd hs-cucumber
 nix-shell --run 'cabal build'
 popd
 ```
@@ -43,10 +43,10 @@ You’re ready to go!  Try this:
 
 ```sh
 pushd cucumber-bootstrap
-nix-shell -p bundler ruby --run 'PATH=$PATH:../TODO-fill-in-repository-name-here/dist/build/cucino/ ./bin/cucumber'
+nix-shell -p bundler ruby --run 'PATH=$PATH:../hs-cucumber/dist/build/cucino/ ./bin/cucumber'
 popd
 ```
 
 [1]: https://github.com/cucumber/cucumber-bootstrap
 [2]: https://github.com/flori/json/issues/229
-[3]: https://github.com/shak-mar/TODO-fill-in-repository-name-here/TODO-path
+[3]: https://github.com/shak-mar/hs-cucumber/blob/master/doc/supporting-files/bootstrap-Use-json-1.8.2.patch
