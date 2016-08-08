@@ -22,8 +22,9 @@ git am ../hs-cucumber/doc/supporting-files/bootstrap-Use-json-1.8.2.patch
 popd
 ```
 
-With a bit of prayer, the following bundler run will succeed, leaving you with
-the required ruby things:
+With a bit of prayer (uninformed me sadly doesn’t know of any real ruby
+packaging for Nix that actually works), the following bundler run will succeed,
+leaving you with the required ruby things:
 
 ```sh
 pushd cucumber-bootstrap
