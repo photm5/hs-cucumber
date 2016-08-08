@@ -12,18 +12,11 @@ import Testing.Cucumber.Types (Handler, Handler', Keyword(..), Mapping(..),
 import Text.Read (readMaybe)
 import Text.Regex.Posix ((=~~), getAllTextSubmatches)
 
--- TODO: Inline these types
-
-type MapperM m = forall a b. (Typeable a, Typeable b)
-              => String         -- ^ The regular expression to match against
-              -> Handler a b m  -- ^ The code to be executed if it matches
-              -> Mapping m      -- ^ A Mapping to pass to cucumber
-type Mapper = forall a b. (Typeable a, Typeable b)
-           => String
-           -> ([String] -> Maybe MultilineArg -> a -> Report b)
-           -> Mapping Identity
-
-mappHM :: (Monad m) => MappingConstructor m -> MapperM m
+mappHM :: (Monad m, Typeable a, Typeable b)
+       => MappingConstructor m
+       -> String         -- ^ The regular expression to match against
+       -> Handler a b m  -- ^ The code to be executed if it matches
+       -> Mapping m      -- ^ A Mapping to pass to cucumber
 mappHM c e h = c e h'
   where h' gs m d = case fromDynamic d of
           Nothing -> return . Left $ "Could not match " <> show (dynTypeRep d)
@@ -31,7 +24,11 @@ mappHM c e h = c e h'
           Just x  -> fmap toDyn <$> h gs m x
         hypothetArg = undefined $ h undefined undefined hypothetArg
 
-mappH :: MappingConstructor Identity -> Mapper
+mappH :: (Typeable a, Typeable b)
+      => MappingConstructor Identity
+      -> String
+      -> ([String] -> Maybe MultilineArg -> a -> Report b)
+      -> Mapping Identity
 mappH c e h = mappHM c e $ toIdentHandler h
   where toIdentHandler h gs m s = Identity $ h gs m s
 
