@@ -4,8 +4,9 @@ module Main where
 
 import Data.Functor.Identity (Identity)
 import Data.Monoid ((<>))
-import Testing.Cucumber.Main (cucumber)
-import Testing.Cucumber.Types (Mapping(..), Report, mapp)
+import Testing.Cucumber (cucumber)
+import Testing.Cucumber.Types (Mapping(..), Report)
+import Testing.Cucumber.Mappings (mapp)
 import Text.Read (readMaybe)
 
 main = cucumber cucinoMappings

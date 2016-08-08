@@ -1,6 +1,6 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module Testing.Cucumber.Main where
+module Testing.Cucumber where
 
 import Control.Monad (forM_, liftM2)
 import Data.Char (toLower)
@@ -14,41 +14,13 @@ import Language.Abacate (Feature, FeatureElement(..), MultilineArg, bsName,
     bsSteps, fBackground, fFeatureElements, parseFile, scBasicScenario, stBody,
     stMultilineArg, stStepKeyword)
 import System.Environment (getArgs)
-import Testing.Cucumber.Types (Keyword(..), Mapping(..), Report, mapp, match)
+import Testing.Cucumber.Types (Keyword(..), Mapping(..), Report, Results(..),
+    Scenario(..), ScenarioResult(..), Step(..), StepResult(..), isFailed,
+    mergeRess)
+import Testing.Cucumber.Mappings (mapp, match)
 import Text.Read (readMaybe)
 
 import Debug.Trace (traceShow)
-
-data Scenario = Scenario
-              { scenarioName :: String
-              , scenarioSteps :: [Step]
-              }
-
-data Step = Step
-          { stepKeyword :: Keyword
-          , stepText    :: String
-          , stepMultiline :: Maybe MultilineArg
-          }
-
-type Results = [ScenarioResult]
-data ScenarioResult = ScenarioResult
-                    { scenario :: Scenario
-                    , stepResults :: [StepResult]
-                    }
-
-data StepResult = Passed | Failed String | Skipped | Pending
-  deriving (Eq, Show)
-
-isFailed :: StepResult -> Bool
-isFailed (Failed _) = True
-isFailed _          = False
-
-mergeRess :: StepResult -> StepResult -> StepResult
-mergeRess (Failed x) _ = (Failed x)
-mergeRess _ (Failed x) = (Failed x)
-mergeRess Pending _ = Pending
-mergeRess _ Pending = Pending
-mergeRess _ x = x
 
 cucumber :: [Mapping Identity] -> IO ()
 cucumber ms = do

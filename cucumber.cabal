@@ -10,7 +10,8 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Testing.Cucumber.Main
+  exposed-modules:     Testing.Cucumber
+                     , Testing.Cucumber.Mappings
                      , Testing.Cucumber.Types
   build-depends:       base >=4.9 && <4.10
                      , abacate >=0.0 && <0.1
