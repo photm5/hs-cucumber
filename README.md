@@ -29,12 +29,12 @@ missed an attempt, please tell me by opening an issue!):
 [2]: https://github.com/sol/cucumber-haskell
 [3]: https://github.com/Erkan-Yilmaz/haskell-cucumber
 
-So, now that I’ve complained about the others, let’s talk about the flaws of my
-attempt.  We just saw the same problem from three different perspectives:
-Haskell isn’t dynamically typed, and running as many passing steps as possible
-asks for deferring type errors to runtime.  I propose to approach the problem
-from a different angle:  Embracing the need of dynamic typing to (kind-of)
-elegantly solve the problem.
+So, now that I’ve complained about the others, let’s talk about my attempt.  We
+just saw the same problem from three different perspectives: Haskell isn’t
+dynamically typed, and running as many passing steps as possible asks for
+deferring type errors to runtime.  I propose to approach the problem from a
+different angle:  Embracing the need of dynamic typing to (kind-of) elegantly
+solve the problem.
 
 This means I’m using `Dynamic` and `Typeable` (which are not the nicest of
 things, but arguably necessary in this case) in order to allow the use of
